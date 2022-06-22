@@ -1,12 +1,11 @@
-# Read CSV from URl using pandas and download all the files on website
+# PDF extraction
 
-import pandas as pd
-# Read 1 csv frm website
-df_premier21 = pd.read_csv('https://www.football-data.co.uk/mmz4281/2122/E0.csv')
+import camelot
 
-# showing dataframes
-df_premier21
+tables = camelot.read_pdf('foo.pdf', pages='1')
 
-#rename columns
-df_premier21.rename(columns={'FTHG': 'home_goals','FTAG': 'away_goals'}, inplace=True)
-print(df_premier21)
+print(tables)
+
+tables.export('foo.csv', f='csv', compress=True)
+
+tables[0].to_csv('foo.csv')
